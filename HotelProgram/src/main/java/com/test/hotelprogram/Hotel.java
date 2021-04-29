@@ -18,7 +18,8 @@ import java.util.Scanner;
  * @author shona
  */
 public class Hotel {
-        private static Scanner input;
+    
+    private static Scanner input;
     private Room[] rooms;
     private int roomsBooked;
     private Queue queue;
