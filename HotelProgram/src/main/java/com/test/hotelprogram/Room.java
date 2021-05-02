@@ -60,4 +60,8 @@ public class Room {
         return payingGuest.getCardNum();
     }
     
+    public String getPhoneNumber() 
+    {
+        return payingGuest.getPhoneNumber();
+    }
 }

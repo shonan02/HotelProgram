@@ -15,13 +15,15 @@ public class Person {
     private String FirstName;
     private String LastName;
     private String CreditCardNumber;
+    private String phoneNumber;
     
     //Class constructor for the person with three string parameters
-    public Person(String fName, String lName, String cardNum) 
+    public Person(String fName, String lName, String cardNum, String phoneNumber) 
     {
         this.FirstName = fName;
         this.LastName = lName;
         this.CreditCardNumber = cardNum;
+        this.phoneNumber = phoneNumber;
     }
     
         //Setter method for setting the first name
@@ -48,4 +50,8 @@ public class Person {
         return CreditCardNumber;
     }
     
+    public String getPhoneNumber() 
+    {
+        return phoneNumber;
+    }
 }

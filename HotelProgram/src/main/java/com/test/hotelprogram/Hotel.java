@@ -204,6 +204,8 @@ public class Hotel {
                     writer.write(room.getCardNum());
                     writer.write(lineSpace);
                     writer.write(Integer.toString(room.GetGuestsNo()));
+                    writer.write(lineSpace);
+                    writer.write(room.getPhoneNumber());
                     writer.newLine();
                 } else 
                 {
@@ -228,7 +230,7 @@ public class Hotel {
         {
             //Initialise rooms booked back to 0
             roomsBooked = 0;
-            String[] data = new String[3];
+            String[] data = new String[4];
             //Use BufferedReader class to read external text file
             try (BufferedReader reader = new BufferedReader(new FileReader("HotelData.txt"))) 
             {
@@ -248,11 +250,12 @@ public class Hotel {
                             String fname = data[0];
                             String lname = data[1];
                             String cardNum = data[2];
+                            String phoneNumber = data[3];
                             
                             //Change guestNo value from String to integer
                             int guestNo = Integer.parseInt(data[3]);
                             Person customer; //Initialise new person
-                            customer = new Person(fname, lname, cardNum); //Create person with customer information
+                            customer = new Person(fname, lname, cardNum, phoneNumber); //Create person with customer information
                             rooms[i] = new Room(customer, guestNo); //Store the person in a room
                             roomsBooked++; //Increment roomsBooked by 1
                     }  
@@ -312,19 +315,24 @@ public class Hotel {
         String fname = (input.nextLine()).trim(); //Trim data so no errors when storing in external file
         System.out.println("Last name: ");
         String lname = (input.nextLine()).trim();
-        
+        String phoneNumber;
         String cardNum;
         do 
         { //Do-while loop to ivalidate cardNum length is 16
             System.out.println("What is your credit card number (MUST be 16 digit): ");
             cardNum = input.nextLine();
         } while (cardNum.length() != 16);
-
+        do 
+        {
+            System.out.println("What is your phone number (MUST be 11 digits): ");
+            phoneNumber = input.nextLine();
+        } while (phoneNumber.length() != 11);
+        
             System.out.println("Number of guests:");
             int guestNo = input.nextInt();
             input.nextLine();
             //Create a person object
-            Person customer = new Person(fname, lname, cardNum);
+            Person customer = new Person(fname, lname, cardNum, phoneNumber);
             Room room = new Room(customer, guestNo);
             //Return the customer
             return room;
