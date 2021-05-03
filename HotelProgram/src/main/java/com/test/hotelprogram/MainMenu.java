@@ -21,10 +21,9 @@ public class MainMenu {
         System.out.println("E : Display empty rooms");
         System.out.println("D : Delete customer from room");
         System.out.println("F : Find room from customer name");
-        System.out.println("S : Store program data into file");
-        System.out.println("L : Load program data from file");
         System.out.println("O : View guests ordered aphabetically by name");
         System.out.println("W: Display waiting queue.");
+        System.out.println("R: Empty hotel, queue, and stored data.");
         System.out.println("Press Q to exit.");
     }
 }
