@@ -108,13 +108,6 @@ public class Hotel {
 
     }
     
-    public void PrintRoomName(Room room) {
-        System.out.printf("%30s", room.getName());
-    }
-    
-    public void PrintContactInfo(Room room) {
-        System.out.printf("%15s %15s", room.getPhoneNumber());
-    }
     
     //Method to display all empty rooms
     public void DisplayEmptyRooms() {
@@ -252,28 +245,28 @@ public class Hotel {
             try (BufferedReader reader = new BufferedReader(new FileReader("HotelData.txt"))) 
             {
                 //Loop through each line of file
-                for(int i=0; i < rooms.length; i ++)
+                for(Room room: rooms)
                 {
                     String currentLine = reader.readLine();
                     
                     //If line is empty, set room to empty
                     if("".equals(currentLine)) 
                     {
-                        rooms[i] = new Room();
+                        room = new Room();
                     } else 
                     {    
                         //Else split the data into an array
                         data = currentLine.split(" ");
-                            String fname = data[0];
-                            String lname = data[1];
-                            String cardNum = data[2];
-                            String phoneNumber = data[3];
+                        String fname = data[0];
+                        String lname = data[1];
+                        String cardNum = data[2];
+                        String phoneNumber = data[3];
                             
-                            //Change guestNo value from String to integer
-                            int guestNo = Integer.parseInt(data[3]);
-                            Person customer; //Initialise new person
-                            customer = new Person(fname, lname, cardNum, phoneNumber); //Create person with customer information
-                            rooms[i] = new Room(customer, guestNo); //Store the person in a room
+                        //Change guestNo value from String to integer
+                        int guestNo = Integer.parseInt(data[3]);
+                        Person customer; //Initialise new person
+                        customer = new Person(fname, lname, cardNum, phoneNumber); //Create person with customer information
+                        room = new Room(customer, guestNo); //Store the person in a room
                             roomsBooked++; //Increment roomsBooked by 1
                     }  
                 }
@@ -300,9 +293,9 @@ public class Hotel {
         }
 
         //Nested for loop
-        for(int i=0; i < orderedNames.size(); i++)
+        for(int i = 0; i < orderedNames.size(); i++)
         {
-            for(int j= i + 1; j < orderedNames.size(); j++)
+            for(int j = i + 1; j < orderedNames.size(); j++)
             {
                 //Compare each value to each other
                 if(orderedNames.get(i).compareTo(orderedNames.get(j)) > 0) 
@@ -317,11 +310,10 @@ public class Hotel {
         
         System.out.println("\nNames in alphabetical order: ");
         
-        //Print new array to user 
-        for (String orderedName : orderedNames)
-        {
+        //Print new array to user
+        orderedNames.forEach(orderedName -> {
             System.out.println(orderedName);
-        }   
+        });   
     }
     
     public void EmptyHotelandQueue() {
@@ -370,9 +362,9 @@ public class Hotel {
  
     
     private void initialise() {
-        for(int i =0; i < rooms.length; i++)
+        for(Room room: rooms)
         {
-            rooms[i] = new Room();
+            room = new Room();
         }
     }
 }
