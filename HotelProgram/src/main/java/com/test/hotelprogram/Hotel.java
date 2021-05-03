@@ -24,6 +24,7 @@ public class Hotel {
     private int roomsBooked;
     private Queue queue;
     private MainMenu menu;
+    private FormatValidation validUserInput;
     
     //Hotel constructor to build hotel
     public Hotel() {
@@ -32,6 +33,7 @@ public class Hotel {
         roomsBooked = 0;
         rooms = new Room[8]; initialise();
         queue = new Queue();
+        validUserInput = new FormatValidation();
     }
 
     public void GetMenu() {
@@ -46,36 +48,41 @@ public class Hotel {
     public void AddCustomer() {
         Room room; 
         //Selection statement to check hotel isn't full
-        if(roomsBooked != 8) 
+        try 
         {
-            System.out.println("What room would you like to book (1-8): ");
-            int roomNum = (input.nextInt()-1);
-            input.nextLine();
-            if(rooms[roomNum].getStatus() == false)
+            if(roomsBooked != 8) 
             {
-                //If room is empty call external method to get customer info and store in variable room
-                room = GetCustomerInfo();
-                //Store the customer information in the given room
-                rooms[roomNum] = room;
-                roomsBooked++; //Increment roomsBooked by one  
+                System.out.println("What room would you like to book (1-8): ");
+                int roomNum = (input.nextInt()-1);
+                input.nextLine();
+                if(rooms[roomNum].getStatus() == false)
+                {
+                    room = GetCustomerInfo();
+                    rooms[roomNum] = room;
+                    roomsBooked++;
+                } else 
+                {
+                    //Let the user know if the room is booked to try again 
+                    System.out.println("This room is booked. Please try again.");
+                }
             } else 
             {
-                //Let the user know if the room is booked to try again 
-                System.out.println("This room is booked. Please try again.");
+                //If hotel is full, check if there is space in the queue by calling isFull() method from Queue class
+                if(!queue.isFull()) 
+                {
+                    System.out.println("Hotel is booked - please join waiting list.");
+                    room = GetCustomerInfo();
+                    //Add the customer to the end of the waiting list
+                    queue.addQueue(room);
+                } else 
+                {
+                    System.out.println("Hotel and queue are full. Please come back.");
+                }
             }
-        } else 
+        } catch (Exception e)
         {
-            //If hotel is full, check if there is space in the queue by calling isFull() method from Queue class
-            if(!queue.isFull()) 
-            {
-                System.out.println("Hotel is booked - please join waiting list.");
-                room = GetCustomerInfo();
-                //Add the customer to the end of the waiting list
-                queue.addQueue(room);
-            } else 
-            {
-                System.out.println("Hotel and queue are full. Please come back.");
-            }
+            System.out.println("Error: " + e);
+            System.out.println("Please try again.");
         }
     }
     
@@ -323,25 +330,25 @@ public class Hotel {
     
     //External method to get customer information in the AddCustomer() method 
     public Room GetCustomerInfo() {
-        
-        System.out.println("First name:");
-        String fname = (input.nextLine()).trim(); //Trim data so no errors when storing in external file
-        System.out.println("Last name: ");
-        String lname = (input.nextLine()).trim();
-        String phoneNumber;
-        String cardNum;
-        do 
-        { //Do-while loop to ivalidate cardNum length is 16
-            System.out.println("What is your credit card number (MUST be 16 digit): ");
-            cardNum = input.nextLine();
-        } while (cardNum.length() != 16);
+        boolean valid;
+        String fname, lname, phoneNumber, cardNum;
         do 
         {
+            System.out.println("**IF INPUT IS INVALID, YOU WILL BE ASKED TO RE ENTER ALL INFORMATION**");
+            System.out.println("First name:");
+            fname = (input.nextLine()).trim(); //Trim data so no errors when storing in external file
+            System.out.println("Last name: ");
+            lname = (input.nextLine()).trim();
             System.out.println("What is your phone number (MUST be 11 digits): ");
-            phoneNumber = input.nextLine();
-        } while (phoneNumber.length() != 11);
-        
-            System.out.println("Number of guests:");
+            phoneNumber = (input.nextLine()).trim();
+            System.out.println("What is your credit card number (MUST be 16 digit): ");
+            cardNum = (input.nextLine()).trim();
+            valid = validUserInput.validateUserInfo(phoneNumber, cardNum, fname, lname);
+        } while(!valid);
+
+        System.out.println("Number of guests:");
+        try 
+        {
             int guestNo = input.nextInt();
             input.nextLine();
             //Create a person object
@@ -349,7 +356,14 @@ public class Hotel {
             Room room = new Room(customer, guestNo);
             //Return the customer
             return room;
+        } catch (Exception e)
+        {
+            System.out.println("Error: " + e);
+            System.out.println("Please try again.");
+            return new Room();
+        }
     }
+ 
     
     private void initialise() {
         for(int i =0; i < rooms.length; i++)
