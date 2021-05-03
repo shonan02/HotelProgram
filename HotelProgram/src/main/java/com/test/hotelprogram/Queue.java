@@ -26,7 +26,7 @@ public class Queue {
         QueueArray = new Room[8];
 
         //Initialise the QueueArray to empty rooms
-        initialise(QueueArray);
+        initialise();
     }
     
     public void addQueue(Room newRoom) 
@@ -84,9 +84,9 @@ public class Queue {
     }
     
     //Private method to initialise the queue to empty rooms
-    private void initialise(Room[] queue) 
+    public void initialise() 
     {
-        for(Room queueValue : queue) 
+        for(Room queueValue : QueueArray) 
         {
             queueValue = new Room();
         }
