@@ -86,21 +86,30 @@ public class Hotel {
     
     //Method to display all rooms at the users request
     public void DisplayRooms() {
-        //Loop through each room to see if empty 
-        for(int i=0; i < rooms.length; i++) 
+        System.out.printf("%-5s %-15s %-10s %-10s", "ROOM", "NAME", "GUESTS", "CONTACT");
+        System.out.println("\n----------------------------------------");
+        for(int i = 0; i < rooms.length; i++)
         {
             if(rooms[i].getStatus() == false)
             {
-                System.out.println("Room " + (i+1) + " is empty.\n");
-            } else 
+                System.out.printf("%-5d %-15s %-10s %-10s", (i+1), "EMPTY", " ", " ");
+                System.out.print("\n");
+            } else
             {
-                //If room is occupied, use getter methods to return the room information
-                System.out.println("Room " + (i+1) + " occupied by: "+ rooms[i].getName());
-                System.out.println("Guest number: " + rooms[i].GetGuestsNo() + "\n");
+                System.out.printf("%-5d %-15s %-10d %-10s", (i+1), rooms[i].getName(), rooms[i].GetGuestsNo(), rooms[i].getPhoneNumber());
+                System.out.print("\n");
             }
+            System.out.println("\nNumber of rooms booked: " + roomsBooked);
         }
-        //Output number of booked rooma in the hotel
-        System.out.println("\nNumber of rooms booked: " + roomsBooked);
+
+    }
+    
+    public void PrintRoomName(Room room) {
+        System.out.printf("%30s", room.getName());
+    }
+    
+    public void PrintContactInfo(Room room) {
+        System.out.printf("%15s %15s", room.getPhoneNumber());
     }
     
     //Method to display all empty rooms
