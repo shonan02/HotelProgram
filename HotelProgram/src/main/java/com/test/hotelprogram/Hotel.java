@@ -30,12 +30,8 @@ public class Hotel {
         menu = new MainMenu();
         input = new Scanner(System.in);
         roomsBooked = 0;
-        rooms = new Room[8];
+        rooms = new Room[8]; initialise();
         queue = new Queue();
-        for(int i = 0; i < rooms.length; i++) 
-        {
-            rooms[i] = new Room();
-        }
     }
 
     public void GetMenu() {
@@ -98,9 +94,10 @@ public class Hotel {
             {
                 System.out.printf("%-5d %-15s %-10d %-10s", (i+1), rooms[i].getName(), rooms[i].GetGuestsNo(), rooms[i].getPhoneNumber());
                 System.out.print("\n");
-            }
-            System.out.println("\nNumber of rooms booked: " + roomsBooked);
+            }        
         }
+        System.out.println("\nNumber of rooms booked: " + roomsBooked);
+
 
     }
     
@@ -316,6 +313,13 @@ public class Hotel {
         }   
     }
     
+    public void EmptyHotelandQueue() {
+        roomsBooked = 0; 
+        initialise();
+        queue.initialise();
+        StoreData();
+        System.out.println("Hotel and Queue are emptied.");
+    }
     
     //External method to get customer information in the AddCustomer() method 
     public Room GetCustomerInfo() {
@@ -345,7 +349,12 @@ public class Hotel {
             Room room = new Room(customer, guestNo);
             //Return the customer
             return room;
-
-
+    }
+    
+    private void initialise() {
+        for(int i =0; i < rooms.length; i++)
+        {
+            rooms[i] = new Room();
+        }
     }
 }
