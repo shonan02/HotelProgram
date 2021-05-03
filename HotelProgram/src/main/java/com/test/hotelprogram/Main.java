@@ -10,6 +10,7 @@ package com.test.hotelprogram;
  * @author shona
  */
 
+import java.io.File;
 import java.util.Scanner; 
 
 public class Main {
@@ -19,7 +20,15 @@ public class Main {
      */
 
     public static void main(String[] args) {
-        Hotel hotel = new Hotel(); //Create hotel object 
+        Hotel hotel = new Hotel();
+        
+        File filename = new File("HotelData.txt");
+        if(filename.exists()) 
+        {  hotel.LoadData();
+           System.out.println("Hotel data loaded from file successfully..\n\n");
+        } 
+        else { System.out.println("Empty hotel initialised"); }
+        
         boolean loop = true;
         Scanner input = new Scanner(System.in);
         
@@ -35,11 +44,13 @@ public class Main {
                 case "E" -> hotel.DisplayEmptyRooms();
                 case "D" -> hotel.DeleteCustomer();
                 case "F" -> hotel.FindRoom();
-                case "S" -> hotel.StoreData();
-                case "L" -> hotel.LoadData();
                 case "O" -> hotel.OrderAlphabetically();
                 case "W" -> hotel.GetQueue();
-                case "Q" -> loop = false; //If user opts to quit, loop is stopped
+                case "R" -> hotel.EmptyHotelandQueue();
+                case "Q" -> {
+                    hotel.StoreData();
+                    loop = false; 
+                }
                 default -> //Default case for if user input is not recognised 
                     System.out.println("Option not recognised. Please try again.");
             }
