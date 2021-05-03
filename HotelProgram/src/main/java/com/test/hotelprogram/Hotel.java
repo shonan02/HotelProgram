@@ -198,44 +198,48 @@ public class Hotel {
     }
     
     //Method to store data in external text file
-    public void StoreData() {
-        String lineSpace = " ";
-        
+    public void StoreData() { 
         try //Excpetion statement to catch error
         {
             //Use BufferedWriter class to open HotelData text file
             BufferedWriter writer = new BufferedWriter(new FileWriter("HotelData.txt"));
-            
-            //Loop through each room
-            for (Room room : rooms) 
-            {
-                //If room is occupied, store user information in file
-                if (room.getStatus() == true)
-                {
-                    writer.write(room.getName());
-                    writer.write(lineSpace);
-                    writer.write(room.getCardNum());
-                    writer.write(lineSpace);
-                    writer.write(Integer.toString(room.GetGuestsNo()));
-                    writer.write(lineSpace);
-                    writer.write(room.getPhoneNumber());
-                    writer.newLine();
-                } else 
-                {
-                    //Else write an empty line to indicate no customer
-                    writer.write("");
-                    writer.newLine();
-                }
-                writer.flush();
-            }
-            
+            StoreArray(rooms, writer);
+            writer.write("QUEUE");   
         } catch (IOException e) 
         {
-            System.out.println("Sorry an error occured: " + e);
-            
+            System.out.println("Sorry an error occured: " + e); 
         }
-
     }
+    
+    public void StoreArray(Room[] array, BufferedWriter writer) {
+        String lineSpace = " ";
+        try {
+            for (Room room : array) 
+                {
+                    //If room is occupied, store user information in file
+                    if (room.getStatus() == true)
+                    {
+                        writer.write(room.getName());
+                        writer.write(lineSpace);
+                        writer.write(room.getCardNum());
+                        writer.write(lineSpace);
+                        writer.write(Integer.toString(room.GetGuestsNo()));
+                        writer.write(lineSpace);
+                        writer.write(room.getPhoneNumber());
+                        writer.newLine();
+                    } else 
+                    {
+                        //Else write an empty line to indicate no customer
+                        writer.write("");
+                        writer.newLine();
+                    }
+                    writer.flush();
+                }
+        } catch (IOException e)
+        {
+            System.out.println("Error: " + e);        
+        }
+    }  
     
     //Method to load data from external text file
     public void LoadData() {
