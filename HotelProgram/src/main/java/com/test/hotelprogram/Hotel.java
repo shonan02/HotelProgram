@@ -19,7 +19,8 @@ import java.util.Scanner;
  */
 public class Hotel {
     
-    private static Scanner input;
+    private static Scanner input = new Scanner(System.in);
+    
     private Room[] rooms;
     private int roomsBooked;
     private Queue queue;
@@ -29,7 +30,6 @@ public class Hotel {
     //Hotel constructor to build hotel
     public Hotel() {
         menu = new MainMenu();
-        input = new Scanner(System.in);
         roomsBooked = 0;
         rooms = new Room[8]; initialise();
         queue = new Queue();
@@ -228,6 +228,7 @@ public class Hotel {
                     }
                     writer.flush();
                 }
+            writer.close();
         } catch (IOException e)
         {
             System.out.println("Error: " + e);        
@@ -267,7 +268,8 @@ public class Hotel {
                         Person customer; //Initialise new person
                         customer = new Person(fname, lname, cardNum, phoneNumber); //Create person with customer information
                         room = new Room(customer, guestNo); //Store the person in a room
-                            roomsBooked++; //Increment roomsBooked by 1
+                        roomsBooked++; //Increment roomsBooked by 1
+                        reader.close();
                     }  
                 }
             }        
@@ -360,6 +362,9 @@ public class Hotel {
         }
     }
  
+    public void CloseScanner() {
+        input.close();
+    }
     
     private void initialise() {
         for(Room room: rooms)
@@ -367,4 +372,6 @@ public class Hotel {
             room = new Room();
         }
     }
+    
+    
 }

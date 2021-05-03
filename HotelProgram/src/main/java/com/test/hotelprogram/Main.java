@@ -49,12 +49,13 @@ public class Main {
                 case "R" -> hotel.EmptyHotelandQueue();
                 case "Q" -> {
                     hotel.StoreData();
+                    hotel.CloseScanner();
                     loop = false; 
                 }
                 default -> //Default case for if user input is not recognised 
                     System.out.println("Option not recognised. Please try again.");
             }
-   
+            input.close();
         }
     }
     
