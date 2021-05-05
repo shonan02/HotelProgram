@@ -11,9 +11,9 @@ package com.test.hotelprogram;
  */
 public class MainMenu {
     
-    public MainMenu() {
-        
-    }
+    /**
+     * This method is used to display the main menu when using the hotel program.
+     */
     public void displayMenu() {
         System.out.println("\n\n---WELCOME TO MY HOTEL---");
         System.out.println("V : View all rooms");

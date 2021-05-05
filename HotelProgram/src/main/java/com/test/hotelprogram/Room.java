@@ -15,7 +15,11 @@ public class Room {
     private Person payingGuest;
     private Boolean occupied;
     
-    //Class constructor
+    /**
+     * This is the class constructor for the Room class.
+     * @param payingGuest Customer information.
+     * @param guestNo Number of guests in the room.
+     */
     public Room(Person payingGuest, int guestNo) 
     {
         this.payingGuest = payingGuest; //Name of the paying guest
@@ -23,13 +27,20 @@ public class Room {
         this.occupied = true; //Room is occupied
     }
 
-    //Default class constructor for when room is empty 
+    /**
+     * This is the default class constructor for when the room is empty
+     * Occupied is declared false.
+     */ 
     public Room() 
     {
         this.occupied = false; //Room is empty   
     }
     
-    //Set the name of the paying guest by using the set method from the Person class
+    /**
+     * This method is used to set the first and last name of the customer.
+     * @param firstName First name.
+     * @param lastName Last name. 
+     */
     public void setName(String firstName, String lastName) 
     {
         payingGuest.setFirstName(firstName);

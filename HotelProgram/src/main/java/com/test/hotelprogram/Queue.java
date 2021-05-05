@@ -15,20 +15,23 @@ public class Queue {
     private final int SIZE;
     private int top, end, currentSize;
     
-    //Queue class constructor 
+    /**
+     * Class constructor to initialise each of the class variables.
+     */
     public Queue() 
     {
-        //Set each variable to its initial value
         this.SIZE = 8;
         this.top = 0;
         this.end = 0;
         this.currentSize = 0;
-        QueueArray = new Room[8];
-
-        //Initialise the QueueArray to empty rooms
-        initialise();
+        QueueArray = new Room[8]; //QueueArray has 8 rooms
+        initialise(); //Initialise the QueueArray to empty rooms
     }
     
+    /**
+     * This method adds a new room to end of the queue if the queue is not full.
+     * @param newRoom New room.
+     */
     public void addQueue(Room newRoom) 
     { //Add queue method with newRoom parameter 
         //Add the parameter to the end of the queue
@@ -40,6 +43,11 @@ public class Queue {
         System.out.println(newRoom.getName() + " has been added to the queue.");
     }
     
+    /**
+     * This method is used to take the object from the front of the queue 
+     * Is called in the DeleteCustomer() method when a customer is deleted from the rooms array.
+     * @return Room to be stored in rooms array.
+     */
     public Room TakeQueue()
     {
         Room room = QueueArray[top];
@@ -50,18 +58,30 @@ public class Queue {
         return room;
     }
     
+    /**
+     * This method is used to check whether the QueueArray is full
+     * Used when a new object is trying to be added into the queue.
+     * @return true or false.
+     */
     public boolean isFull() {
         //Returns true if queue is full
         return top == ((end + 1) % SIZE);  
     }
     
+    /**
+     * THis method is used to check whether the QueueArray is empty
+     * Used when an object is trying to be removed.
+     * @return true or false.
+     */
     public boolean isEmpty() 
     {
         //Returns true if queue is empty
         return top == end;
     }
     
-    //Method to display the values in the queue 
+    /**
+     * This method is used when the user wants to display the contents of the QueueArray.
+     */ 
     public void displayQueue() 
     {
         if(!isEmpty()) 
@@ -83,7 +103,9 @@ public class Queue {
         }
     }
     
-    //Private method to initialise the queue to empty rooms
+    /**
+     * Used to initialise the QueueArray to 8 empty rooms.
+     */
     public void initialise() 
     {
         for(Room queueValue : QueueArray) 

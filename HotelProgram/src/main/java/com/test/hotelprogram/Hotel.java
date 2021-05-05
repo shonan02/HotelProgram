@@ -27,7 +27,10 @@ public class Hotel {
     private MainMenu menu;
     private FormatValidation validUserInput;
     
-    //Hotel constructor to build hotel
+    /**
+     * Class constructor for the hotel
+     * Initialise all class variables.
+     */
     public Hotel() {
         menu = new MainMenu();
         roomsBooked = 0;
@@ -35,19 +38,26 @@ public class Hotel {
         queue = new Queue();
         validUserInput = new FormatValidation();
     }
-
+    
+    /**
+     * Get method to display the menu from MainMenu class.
+     */
     public void GetMenu() {
         menu.displayMenu();
     }
     
+    /**
+     * Get method to display the queue array from Queue class.
+     */
     public void GetQueue() {
         queue.displayQueue();
     }
     
-    //Method used to add customer
+    /**
+     * Adds a customer to the rooms array.
+     */
     public void AddCustomer() {
         Room room; 
-        //Selection statement to check hotel isn't full
         try 
         {
             if(roomsBooked != 8) 
@@ -86,8 +96,10 @@ public class Hotel {
         }
     }
     
-    
-    //Method to display all rooms at the users request
+    /**
+     * Display the information from the rooms array in a table format
+     * Displays the room number, customer name, customer contact details. 
+     */
     public void DisplayRooms() {
         System.out.printf("%-5s %-15s %-10s %-10s", "ROOM", "NAME", "GUESTS", "CONTACT");
         System.out.println("\n----------------------------------------");
@@ -108,8 +120,9 @@ public class Hotel {
 
     }
     
-    
-    //Method to display all empty rooms
+    /**
+     * Displays only the empty rooms in the rooms array.
+     */
     public void DisplayEmptyRooms() {
         if(roomsBooked == 8) 
         {
@@ -129,7 +142,9 @@ public class Hotel {
         }
     }
     
-    //Method to delete customer from room
+    /**
+     * Delete the information stored in a specific room and replace it with an empty room.
+     */
     public void DeleteCustomer() {
         int roomNum; 
         System.out.println("Which room would you like to delete (1-8): ");
@@ -160,6 +175,9 @@ public class Hotel {
         
     }
     
+    /**
+     * Find a room in an array by searching for a name.
+     */
     public void FindRoom() {
         //Initialise room number for validation
         int roomNum = - 1;
@@ -190,7 +208,9 @@ public class Hotel {
         }
     }
     
-    //Method to store data in external text file
+    /**
+     * Used to store the data from the rooms array in an external text file called 'HotelData.txt'.
+     */
     public void StoreData() { 
         try //Excpetion statement to catch error
         {
@@ -204,6 +224,11 @@ public class Hotel {
         }
     }
     
+    /**
+     * This method is called from the StoreData method and is used to store a specific array in the file.
+     * @param array The array of Room objects to be stored in the text file.
+     * @param writer The BufferedWriter object used to write data to the file.
+     */
     public void StoreArray(Room[] array, BufferedWriter writer) {
         String lineSpace = " ";
         try {
@@ -235,7 +260,9 @@ public class Hotel {
         }
     }  
     
-    //Method to load data from external text file
+    /**
+     * This method loads the data from the file into the rooms array using a BufferedReader object.
+     */
     public void LoadData() {
         try 
         {
@@ -279,6 +306,9 @@ public class Hotel {
         }
     }
     
+    /**
+     * This method using a for each to loop to loop through the customer names and print them in alphabetical order.
+     */
     public void OrderAlphabetically() {
         String temp;
         //Initialise new arrayList to store names in alphabetical order
@@ -318,6 +348,10 @@ public class Hotel {
         });   
     }
     
+    /**
+     * This method is used to initialise the rooms array and queue back to empty
+     * Then empties the HotelData.txt file for the next use of the program.
+     */
     public void EmptyHotelandQueue() {
         roomsBooked = 0; 
         initialise();
@@ -326,7 +360,10 @@ public class Hotel {
         System.out.println("Hotel and Queue are emptied.");
     }
     
-    //External method to get customer information in the AddCustomer() method 
+    /**
+     * This method is used to get the inputted information from the user.
+     * @return a room object to store in the rooms array.
+     */
     public Room GetCustomerInfo() {
         boolean valid;
         String fname, lname, phoneNumber, cardNum;
@@ -362,10 +399,16 @@ public class Hotel {
         }
     }
  
+    /**
+     * This method is used to close the Scanner object.
+     */
     public void CloseScanner() {
         input.close();
     }
     
+    /**
+     * This method is used to initialise the rooms array to all empty rooms.
+     */
     private void initialise() {
         for(Room room: rooms)
         {
