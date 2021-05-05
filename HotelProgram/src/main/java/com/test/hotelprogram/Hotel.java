@@ -91,6 +91,7 @@ public class Hotel {
             }
         } catch (Exception e)
         {
+            input.nextLine();
             System.out.println("Error: " + e);
             System.out.println("Please try again.");
         }
@@ -102,6 +103,7 @@ public class Hotel {
      */
     public void DisplayRooms() {
         System.out.printf("%-5s %-15s %-10s %-10s", "ROOM", "NAME", "GUESTS", "CONTACT");
+        
         System.out.println("\n----------------------------------------");
         for(int i = 0; i < rooms.length; i++)
         {
@@ -216,8 +218,7 @@ public class Hotel {
         {
             //Use BufferedWriter class to open HotelData text file
             BufferedWriter writer = new BufferedWriter(new FileWriter("HotelData.txt"));
-            StoreArray(rooms, writer);
-            writer.write("QUEUE");   
+            StoreArray(rooms, writer);  
         } catch (IOException e) 
         {
             System.out.println("Sorry an error occured: " + e); 
@@ -253,7 +254,6 @@ public class Hotel {
                     }
                     writer.flush();
                 }
-            writer.close();
         } catch (IOException e)
         {
             System.out.println("Error: " + e);        
@@ -268,23 +268,23 @@ public class Hotel {
         {
             //Initialise rooms booked back to 0
             roomsBooked = 0;
-            String[] data = new String[4];
+            
             //Use BufferedReader class to read external text file
             try (BufferedReader reader = new BufferedReader(new FileReader("HotelData.txt"))) 
             {
                 //Loop through each line of file
-                for(Room room: rooms)
+                for(int i = 0; i < rooms.length; i++)
                 {
                     String currentLine = reader.readLine();
                     
                     //If line is empty, set room to empty
                     if("".equals(currentLine)) 
                     {
-                        room = new Room();
+                        rooms[i] = new Room();
                     } else 
                     {    
                         //Else split the data into an array
-                        data = currentLine.split(" ");
+                        String[] data = currentLine.split(" ");
                         String fname = data[0];
                         String lname = data[1];
                         String cardNum = data[2];
@@ -294,16 +294,17 @@ public class Hotel {
                         int guestNo = Integer.parseInt(data[3]);
                         Person customer; //Initialise new person
                         customer = new Person(fname, lname, cardNum, phoneNumber); //Create person with customer information
-                        room = new Room(customer, guestNo); //Store the person in a room
+                        rooms[i] = new Room(customer, guestNo); //Store the person in a room
                         roomsBooked++; //Increment roomsBooked by 1
-                        reader.close();
                     }  
                 }
-            }        
+            }
+            
         } catch(IOException e) //Catch error thrown
         { 
             System.out.println("An error occured: " + e);
         }
+        
     }
     
     /**
@@ -410,9 +411,9 @@ public class Hotel {
      * This method is used to initialise the rooms array to all empty rooms.
      */
     private void initialise() {
-        for(Room room: rooms)
+        for(int i = 0; i < rooms.length; i++)
         {
-            room = new Room();
+            rooms[i] = new Room();
         }
     }
     

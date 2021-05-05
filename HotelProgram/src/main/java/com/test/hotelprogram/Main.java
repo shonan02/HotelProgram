@@ -55,8 +55,9 @@ public class Main {
                 default -> //Default case for if user input is not recognised 
                     System.out.println("Option not recognised. Please try again.");
             }
-            input.close();
+            
         }
+        //input.close();
     }
     
     
