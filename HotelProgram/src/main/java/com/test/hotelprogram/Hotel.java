@@ -40,21 +40,22 @@ public class Hotel {
     }
     
     /**
-     * Get method to display the menu from MainMenu class.
+     * THis is a get method to display the menu from MainMenu class.
      */
     public void GetMenu() {
         menu.displayMenu();
     }
     
     /**
-     * Get method to display the queue array from Queue class.
+     * This is a get method to display the queue array from Queue class.
      */
     public void GetQueue() {
         queue.displayQueue();
     }
     
     /**
-     * Adds a customer to the rooms array.
+     * This method adds a customer to the rooms array
+     * by calling the GetCustomerInfo() method.
      */
     public void AddCustomer() {
         Room room; 
@@ -98,7 +99,7 @@ public class Hotel {
     }
     
     /**
-     * Display the information from the rooms array in a table format
+     * This method displays the information from the rooms array in a table format
      * Displays the room number, customer name, customer contact details. 
      */
     public void DisplayRooms() {
@@ -123,7 +124,7 @@ public class Hotel {
     }
     
     /**
-     * Displays only the empty rooms in the rooms array.
+     * This method displays only the empty rooms in the rooms array.
      */
     public void DisplayEmptyRooms() {
         if(roomsBooked == 8) 
@@ -145,7 +146,7 @@ public class Hotel {
     }
     
     /**
-     * Delete the information stored in a specific room and replace it with an empty room.
+     * This method deletes the information stored in a specific room and replaces it with an empty room.
      */
     public void DeleteCustomer() {
         int roomNum; 
@@ -178,7 +179,7 @@ public class Hotel {
     }
     
     /**
-     * Find a room in an array by searching for a name.
+     * This method finds a room in an array by searching for a name.
      */
     public void FindRoom() {
         //Initialise room number for validation
@@ -211,7 +212,7 @@ public class Hotel {
     }
     
     /**
-     * Used to store the data from the rooms array in an external text file called 'HotelData.txt'.
+     * This method is used to store the data from the rooms array in an external text file called 'HotelData.txt'.
      */
     public void StoreData() { 
         try //Excpetion statement to catch error
